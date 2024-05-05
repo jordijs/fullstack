@@ -12,9 +12,8 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-
   const [selected, setSelected] = useState(0)
-  
+
   const initialVotes = Array(anecdotes.length).fill(0)
   const [votes, setVote] = useState(initialVotes)
 
@@ -40,12 +39,22 @@ const App = () => {
     setVote(newVotes)
   }
 
+  const getTopAnecdote = () => {
+    const maxVote = Math.max(...votes)
+    if (maxVote === 0) return 'No votes yet'
+    const indexMaxVote = votes.indexOf(maxVote)
+    return anecdotes[indexMaxVote]
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={vote}>vote</button>
       <button onClick={nextAnecdote}>next anecdote</button>
+      <h2>Anecdote with most votes</h2>
+      <p>{getTopAnecdote()}</p>
     </div>
   )
 }
