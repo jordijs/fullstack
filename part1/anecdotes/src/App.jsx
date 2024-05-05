@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -14,9 +13,26 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const handleClick = () => {
+    let random
+    // Prevent displaying again the same anecdote when random number is same as selected
+    do {
+      random = getRandom()
+    } while (random === selected) 
+
+    setSelected(random)
+  }
+
+  const getRandom = () =>{
+    const maxValue = anecdotes.length
+    const random = Math.floor(Math.random() * maxValue)
+    return random
+  }
+
   return (
     <div>
-      {anecdotes[selected]}
+      <p>{anecdotes[selected]}</p>
+      <button onClick={handleClick}>next anecdote</button>
     </div>
   )
 }
