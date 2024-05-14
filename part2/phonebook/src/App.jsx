@@ -6,19 +6,36 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const personObject = {
+      name: newName
+    }
+    setPersons(persons.concat(personObject))
+    setNewName('')
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
-          name: <input />
+          name: <input 
+          value={newName}
+          onChange={handleNameChange}
+          />
         </div>
         <div>
+          <div>debug: {newName}</div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-      ...
+      {persons.map(person => <div>{person.name}</div>)}
     </div>
   )
 }
