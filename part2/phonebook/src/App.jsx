@@ -3,7 +3,7 @@ import { useState } from 'react'
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas' }
-  ]) 
+  ])
   const [newName, setNewName] = useState('')
 
   const handleNameChange = (event) => {
@@ -12,6 +12,15 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    for (const person of persons) {
+      if (person.name === newName) {
+        alert(`${newName} is already added to the phonebook`)
+        setNewName('')
+        return
+      }
+    }
+
     const personObject = {
       name: newName
     }
@@ -24,9 +33,9 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          name: <input 
-          value={newName}
-          onChange={handleNameChange}
+          name: <input
+            value={newName}
+            onChange={handleNameChange}
           />
         </div>
         <div>
