@@ -3,7 +3,7 @@ const Total = ({ parts }) => {
     accumulator + item.exercises
   ), 0)
 
-  return <p><strong>Number of exercises {total}</strong></p>
+  return <p><strong>total of {total} exercises</strong></p>
 }
 
 export default Total
