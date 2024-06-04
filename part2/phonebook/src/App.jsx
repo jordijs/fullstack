@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import personsService from './services/persons'
 
 const App = () => {
 
@@ -32,7 +33,9 @@ const App = () => {
   }
 
   const handleSubmit = (event) => {
+
     event.preventDefault()
+
     for (const person of persons) {
       if (person.name === newName) {
         alert(`${newName} is already added to the phonebook`)
@@ -40,14 +43,21 @@ const App = () => {
         return
       }
     }
+
     const personObject = {
       name: newName,
       number: newNumber,
       id: persons.length + 1
     }
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
+
+    personsService
+      .create(personObject)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      })
+      
   }
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().match(filter))
@@ -57,15 +67,15 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
-      <PersonForm 
-      handleSubmit={handleSubmit}
-      newName={newName}
-      handleNameChange={handleNameChange}
-      newNumber={newNumber}
-      handleNumberChange={handleNumberChange}
+      <PersonForm
+        handleSubmit={handleSubmit}
+        newName={newName}
+        handleNameChange={handleNameChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
       />
       <h3>Numbers</h3>
-      <Persons personsToShow={personsToShow}/>
+      <Persons personsToShow={personsToShow} />
     </div >
   )
 }
