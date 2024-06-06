@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from "./components/Notification";
 import personsService from './services/persons'
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -50,6 +52,15 @@ const App = () => {
                 setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person))
                 setNewName('')
                 setNewNumber('')
+                displayNotification(true, `Edited ${returnedPerson.name}`)
+              })
+              .catch((error) => {
+                if (error.response.status === 404) {
+                  displayNotification(false, `Information of ${person.name} has already been removed from server`)
+                  setPersons(persons.filter(personState =>
+                    personState.id !== person.id
+                  ))
+                }
               })
           }
           return
@@ -68,6 +79,7 @@ const App = () => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+        displayNotification(true, `Added ${returnedPerson.name}`)
       })
 
   }
@@ -76,12 +88,34 @@ const App = () => {
     if (window.confirm(`Delete ${name}?`)) {
       personsService
         .deletePerson(id)
-        .then(deletedPerson => {
-          setPersons(persons.filter(person =>
-            person.id !== deletedPerson.id
-          ))
+        .then((status) => {
+          if (status === 200) {
+            setPersons(persons.filter(person =>
+              person.id !== id
+            ))
+            displayNotification(true, `Deleted ${name}`)
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            displayNotification(false, `${name} has already been deleted`)
+            setPersons(persons.filter(person => {
+              return person.id !== id
+            }))
+          } else {
+            displayNotification(false, `An error ocurred deleting ${name}`)
+          }
         })
     }
+  }
+
+  const displayNotification = (success, message) => {
+    setNotification(
+      { success, message }
+    )
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000);
   }
 
   const personsToShow = persons.filter(person => person.name.toLowerCase().match(filter))
@@ -89,6 +123,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification notification={notification} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h3>Add a new</h3>
       <PersonForm

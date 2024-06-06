@@ -18,7 +18,7 @@ const edit = (personId, editedObject) => {
 
 const deletePerson = (personId) => {
   const request = axios.delete(`${baseUrl}/${personId}`);
-  return request.then((response) => response.data);
+  return request.then((response) => response.status);
 };
 
 export default { getAll, create, edit, deletePerson };
