@@ -15,7 +15,7 @@ const Results = ({ search, matchingCountries, countryDetail, setCountryDetail })
                 <ul>
                     {matchingCountries.map(country =>
                         <li key={country.cca3}>
-                            {country.name.common}<button onClick={() => setCountryDetail(country)} >show</button>
+                            {country.name.common} <button onClick={() => setCountryDetail(country)} >show</button>
                         </li>
                     )}
                 </ul>
