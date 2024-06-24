@@ -54,13 +54,13 @@ const App = () => {
                 setNewNumber('')
                 displayNotification(true, `Edited ${returnedPerson.name}`)
               })
-              .catch((error) => {
+              .catch(error => {
                 if (error.response.status === 404) {
                   displayNotification(false, `Information of ${person.name} has already been removed from server`)
                   setPersons(persons.filter(personState =>
                     personState.id !== person.id
                   ))
-                }
+                } else displayNotification(false, error.response.data.error)
               })
           }
           return
@@ -80,6 +80,9 @@ const App = () => {
         setNewName('')
         setNewNumber('')
         displayNotification(true, `Added ${returnedPerson.name}`)
+      })
+      .catch(error => {
+        displayNotification(false, error.response.data.error)
       })
 
   }
