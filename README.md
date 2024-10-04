@@ -14,6 +14,9 @@ They include practical projects using JavaScript, React, Node.js, Express and Mo
 
 **Part 3**
 - **Phonebook (back)**: Node.js and Express backend for the app from part 2, creating API Rest. Creation of cloud database in MongoDB. Implement validation. Deploy with Fly.io. _Node.js, Express, MongoDB, Mongoose, ESLint, Fly.io_
+- 
+**Part 4**
+- **Bloglist:** Node.js and Express backend for blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. Extension and refactor from a given code. User administration and Token authentication using HTTP POST requests, save information of the authenticated user who created the post in the database. _TDD, Unit Testing, Node.js, Express, MongoDB, Mongoose, ESLint_
 
 As the course requires separate repositories, other parts can be found in the following repositories:
 
