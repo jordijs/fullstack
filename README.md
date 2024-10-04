@@ -1,1 +1,1 @@
-Exercises for the Fullstack open bootcamp by the University of Helsinki.
+Exercises for the Fullstack open course by the University of Helsinki.
