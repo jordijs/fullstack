@@ -8,7 +8,6 @@ As the course requires separate repositories, other parts can be found in the fo
 * https://github.com/jordijs/fullstack-open-part5
 * https://github.com/jordijs/fullstackopen-part9
 
-Projects:
 # Course Information
 - **Description**: App that displays information about the course, displaying information about each part calculated from given data.
 - **Technologies**: _React, props, components, extracting data from an object, calculate using reduce, JavaScript._
@@ -39,8 +38,12 @@ Projects:
 - **Technologies**: _React, state and effect hooks, connection to external APIs (Country list and Open Weather Map) ._
 - **Location**: Part 2
 
-**Part 4**
-- **Bloglist (back):** Node.js and Express backend for blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. Extension and refactor from a given code. User administration and Token authentication using HTTP POST requests, save information of the authenticated user who created the post in the database. _TDD, Unit Testing, Node.js, Express, MongoDB, Mongoose, ESLint_
-
-**Part 5**
-- **Bloglist (front):** React frontend for Bloglist backend. After user enters username and password to a form, the name of the logged user is shown, and data is stored on localstorage. Conditional rendering of blogs data only if user is logged-in. Delete button is only shown if the logged user matches the user that created the blog. Button to like each blog, reordering the list with top-rated first. _React conditional rendering, state and effect hooks, PropTypes, ESLint, Testing: Vitest, End to end testing: Playwright_
+# Bloglist
+## Front-end
+- **Description**: App that allows users to save information about interesting blogs they have stumbled across on the internet. After user enters username and password to a form, the name of the logged user is shown, and data is stored on localstorage. Conditional rendering of blogs data only if user is logged-in. Delete button is only shown if the logged user matches the user that created the blog. Button to like each blog, reordering the list with top-rated first.
+- **Technologies**: _React conditional rendering, state and effect hooks, PropTypes, ESLint, Testing: Vitest, End to end testing: Playwright._
+- **Location**: Part 5
+## Back-end
+- **Description**: Extension and refactor from a given code. User administration and Token authentication using HTTP POST requests, save information of the authenticated user who created the post in the database.
+- **Technologies**: _Node.js, Express, MongoDB, Mongoose, TDD, Unit Testing, ESLint._
+- **Location**: Part 4
